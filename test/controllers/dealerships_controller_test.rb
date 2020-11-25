@@ -2,7 +2,7 @@ require 'test_helper'
 
 class DealershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @dealership = dealerships(:one)
+    @dealership = Dealership.create(name: 'great dealer')
   end
 
   test "should get index" do

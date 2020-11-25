@@ -2,7 +2,12 @@ require 'test_helper'
 
 class VehiclesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @vehicle = vehicles(:one)
+      @vehicle = Vehicle.create(
+        year: 2020,
+        model: 'chevy',
+        make: 'impala',
+        price: 200000
+      )
   end
 
   test "should get index" do
@@ -17,7 +22,7 @@ class VehiclesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create vehicle" do
     assert_difference('Vehicle.count') do
-      post vehicles_url, params: { vehicle: { make,: @vehicle.make,, model,: @vehicle.model,, name,: @vehicle.name,, price: @vehicle.price, year: @vehicle.year } }
+      post vehicles_url, params: { vehicle: { make: @vehicle.make, model: @vehicle.model, price_in_dollars: @vehicle.price, year: @vehicle.year } }
     end
 
     assert_redirected_to vehicle_url(Vehicle.last)
@@ -34,7 +39,7 @@ class VehiclesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update vehicle" do
-    patch vehicle_url(@vehicle), params: { vehicle: { make,: @vehicle.make,, model,: @vehicle.model,, name,: @vehicle.name,, price: @vehicle.price, year: @vehicle.year } }
+    patch vehicle_url(@vehicle), params: { vehicle: { make: @vehicle.make, model: @vehicle.model, name: @vehicle.name, price: @vehicle.price, year: @vehicle.year } }
     assert_redirected_to vehicle_url(@vehicle)
   end
 
