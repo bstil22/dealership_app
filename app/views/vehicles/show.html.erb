@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @vehicle.name %>
-</p>
-
-<p>
   <strong>Price:</strong>
   <%= number_to_currency(@vehicle.price_in_dollars) %>
 </p>
@@ -26,9 +21,16 @@
 </p>
 
 <p>
+  <strong>Condition:</strong>
+  <%= @vehicle.condition.humanize %>
+</p>
+
+<p>
   <strong>Dealers:</strong>
   <%= @vehicle.dealerships.map(&:name).join(', ') %>
 </p>
 
-<%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<% if policy(@vehicle).update? %>
+  <%= link_to 'Edit', edit_vehicle_path(@vehicle) %> |
+<% end %>
 <%= link_to 'Back', vehicles_path %>

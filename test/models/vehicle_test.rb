@@ -6,7 +6,8 @@ class VehicleTest < ActiveSupport::TestCase
       year: 2020,
       model: 'chevy',
       make: 'impala',
-      price: 200000
+      price: 200000,
+      condition: 0
     )
   end
 
@@ -36,5 +37,11 @@ class VehicleTest < ActiveSupport::TestCase
     @vehicle.year = nil
     refute @vehicle.valid?
     assert_not_nil @vehicle.errors[:year]
+  end
+
+  test 'invalid without condition' do
+    @vehicle.condition = nil
+    refute @vehicle.valid?
+    assert_not_nil @vehicle.errors[:condition]
   end
 end

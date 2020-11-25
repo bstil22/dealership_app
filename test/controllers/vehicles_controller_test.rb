@@ -6,8 +6,11 @@ class VehiclesControllerTest < ActionDispatch::IntegrationTest
         year: 2020,
         model: 'chevy',
         make: 'impala',
-        price: 200000
+        price: 200000,
+        condition: 1
       )
+      @current_user = User.create(email: 'foo@bar.com', password: 'foobar', user_type: 1)
+      sign_in(@current_user)
   end
 
   test "should get index" do
@@ -22,7 +25,7 @@ class VehiclesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create vehicle" do
     assert_difference('Vehicle.count') do
-      post vehicles_url, params: { vehicle: { make: @vehicle.make, model: @vehicle.model, price_in_dollars: @vehicle.price, year: @vehicle.year } }
+      post vehicles_url, params: { vehicle: { make: @vehicle.make, model: @vehicle.model, price_in_dollars: @vehicle.price, year: @vehicle.year, condition: @vehicle.condition } }
     end
 
     assert_redirected_to vehicle_url(Vehicle.last)
@@ -39,7 +42,7 @@ class VehiclesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update vehicle" do
-    patch vehicle_url(@vehicle), params: { vehicle: { make: @vehicle.make, model: @vehicle.model, name: @vehicle.name, price: @vehicle.price, year: @vehicle.year } }
+    patch vehicle_url(@vehicle), params: { vehicle: { make: @vehicle.make, model: @vehicle.model, name: @vehicle.name, price: @vehicle.price, year: @vehicle.year, condition: 'used' } }
     assert_redirected_to vehicle_url(@vehicle)
   end
 

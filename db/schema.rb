@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20201123144958) do
+ActiveRecord::Schema.define(version: 20201125232952) do
 
   create_table "dealerships", force: :cascade do |t|
     t.string "name"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20201123144958) do
     t.index ["vehicle_id"], name: "index_inventory_assignments_on_vehicle_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_type"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
   create_table "vehicles", force: :cascade do |t|
     t.string "name"
     t.integer "price"
@@ -35,6 +48,7 @@ ActiveRecord::Schema.define(version: 20201123144958) do
     t.integer "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "condition"
   end
 
 end

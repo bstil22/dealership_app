@@ -25,7 +25,7 @@ class VehiclesController < ApplicationController
   # POST /vehicles.json
   def create
     @vehicle = Vehicle.new(vehicle_params)
-
+    authorize @vehicle
     respond_to do |format|
       if @vehicle.save
         format.html { redirect_to @vehicle, notice: 'Vehicle was successfully created.' }
@@ -40,6 +40,7 @@ class VehiclesController < ApplicationController
   # PATCH/PUT /vehicles/1
   # PATCH/PUT /vehicles/1.json
   def update
+    authorize @vehicle
     respond_to do |format|
       if @vehicle.update(vehicle_params)
         format.html { redirect_to @vehicle, notice: 'Vehicle was successfully updated.' }
@@ -69,6 +70,6 @@ class VehiclesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def vehicle_params
-      params.require(:vehicle).permit(:name, :price_in_dollars, :make, :model, :year, dealership_ids: [])
+      params.require(:vehicle).permit(:name, :price_in_dollars, :make, :model, :year, :condition, dealership_ids: [])
     end
 end

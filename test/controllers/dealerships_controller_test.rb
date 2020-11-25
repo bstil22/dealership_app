@@ -3,6 +3,8 @@ require 'test_helper'
 class DealershipsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @dealership = Dealership.create(name: 'great dealer')
+    @current_user = User.create(email: 'foo@bar.com', password: 'foobar', user_type: 1)
+    sign_in(@current_user)
   end
 
   test "should get index" do
