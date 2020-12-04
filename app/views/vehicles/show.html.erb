@@ -26,6 +26,15 @@
 </p>
 
 <p>
+  <strong>Availability:</strong>
+  <% if @vehicle.on_hold %>
+    <%= "On Hold" %>
+  <% else %>
+    <%= "Available" %>
+  <% end %>
+</p>
+
+<p>
   <strong>Dealers:</strong>
   <%= @vehicle.dealerships.map(&:name).join(', ') %>
 </p>

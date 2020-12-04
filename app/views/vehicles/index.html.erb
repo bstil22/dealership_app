@@ -10,6 +10,7 @@
       <th>Model</th>
       <th>Year</th>
       <th>Condition</th>
+      <th>Availability</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -22,6 +23,9 @@
         <td><%= vehicle.model %></td>
         <td><%= vehicle.year %></td>
         <td><%= vehicle.condition.humanize %></td>
+        <td>
+          <%= vehicle.on_hold ? "On Hold" : "Available" %>
+        </td>
         <td><%= link_to 'Show', vehicle %></td>
         <% if policy(@vehicles).update? %>
           <td><%= link_to 'Edit', edit_vehicle_path(vehicle) %></td>
@@ -39,4 +43,3 @@
 <% if policy(@vehicles).create? %>
   <%= link_to 'New Vehicle', new_vehicle_path %>
 <% end %>
-

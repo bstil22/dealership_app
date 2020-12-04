@@ -41,6 +41,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :on_hold %>
+    <%= form.check_box :on_hold %>
+  </div>
+
+  <div class="field">
     <% Dealership.all.each do |dealer| %>
       <%= check_box_tag "vehicle[dealership_ids][]", dealer.id, @vehicle.dealership_ids.include?(dealer.id) %>
       <%= dealer.name %>
